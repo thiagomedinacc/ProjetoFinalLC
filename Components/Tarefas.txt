@@ -1,0 +1,6 @@
+1- Criar carrinho de compras.
+2- Fazer tela do carrinho de compras.
+3- Estilização da tela do carrinho de compras.
+4- Criar nova tela com detalhe dos produtos.
+5- Estilização da tela de detalhe dos produtos.
+6- ...
