@@ -10,6 +10,7 @@ declare global {
 export type RootStackParamList = {
   TelaCarrinho: undefined;
   Home: undefined;
+  TelaDetalheProdutos: undefined;
   Root: undefined;
 };
 

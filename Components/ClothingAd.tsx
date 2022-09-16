@@ -1,7 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, StyleSheet, Dimensions, Image, TouchableOpacity} from 'react-native';
-import React, {Dispatch} from 'react';
+import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import React, { Dispatch } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Navigation from '../navigation';
 
 export interface IClothingAd {
   title: string;
@@ -13,12 +14,14 @@ export interface IClothingAd {
   isInStock: boolean;
   image: any;
   isFavorite: boolean;
+  
 }
 
 export interface ClothingAdProps extends IClothingAd {
   numberCols: number;
   setList: Dispatch<IClothingAd[]>;
   changeBookmark: () => void;
+  onPress: any // Mudar tipo aqui, deixei any só pra deixar funcionando.
 }
 
 export default function ClothingAd({
@@ -32,11 +35,12 @@ export default function ClothingAd({
   numberCols,
   image,
   isFavorite,
+  onPress,
   setList,
   changeBookmark,
 }: ClothingAdProps) {
-  const {width} = Dimensions.get('window');
-  console.log(numberCols);
+  const { width } = Dimensions.get('window');
+  // console.log(numberCols);
   return (
     <View
       style={[
@@ -65,25 +69,34 @@ export default function ClothingAd({
           elevation: isInStock ? 2 : 0,
           borderRadius: 4,
         }}>
-        <Image
-          onError={({nativeEvent: {error}}) => {
-            console.log(error);
-          }}
-          style={{
-            height: undefined,
-            width: undefined,
-            resizeMode: 'center',
-            flex: 1,
-            opacity: isInStock ? 1 : 0.2,
-          }}
-          source={image}
-        />
+
+
+        <TouchableWithoutFeedback
+          style={{}} // Poderia ser touchableOpacity sem fazer as imagens sumirem?
+          onPress={onPress}
+        >
+          <Image
+            onError={({ nativeEvent: { error } }) => {
+              console.log(error);
+            }}
+            style={{
+              height: undefined,
+              width: undefined,
+              resizeMode: 'center',
+              flex: 1,
+              opacity: isInStock ? 1 : 0.2,
+            }}
+            source={image}
+
+
+          />
+        </TouchableWithoutFeedback>
       </View>
-      <Text style={[styles.text, {textTransform: 'capitalize'}]}>{title}</Text>
+      <Text style={[styles.text, { textTransform: 'capitalize' }]}>{title}</Text>
       <Text style={styles.text}>{type}</Text>
       {isDiscounted ? (
-        <View style={{flexDirection: 'row'}}>
-          <Text style={[styles.text, {textDecorationLine: 'line-through'}]}>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={[styles.text, { textDecorationLine: 'line-through' }]}>
             R${originalValue}
           </Text>
           <Text style={styles.text}>{' ➜ R$' + currentValue}</Text>

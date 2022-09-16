@@ -36,6 +36,8 @@
  } from 'react-native/Libraries/NewAppScreen';
  import CarrinhoDeCompras from '../Components/CarrinhoCompras';
  import ClothingAd, {IClothingAd} from '../Components/ClothingAd';
+import Navigation from '../navigation';
+import { RootStackScreenProps } from '../types';
  
  const item1: IClothingAd = {
    title: 'Camisa social',
@@ -88,7 +90,7 @@
  
  const items: IClothingAd[] = [item1, item2, item4, item3];
  
- const Home = () => {
+ const Home = ( {navigation, route} : RootStackScreenProps<'Home'>) => {
    const [list, setList] = useState(items);
    const [filteredList, setfilteredList] = useState(list);
  
@@ -150,7 +152,10 @@
              <Text style={[styles.text, {fontSize: 15}]}>Fazer Loginaaaa</Text>
            </View>
          </TouchableOpacity>
-         <CarrinhoDeCompras quantidade={quantidadeCompras} />
+         <CarrinhoDeCompras 
+         quantidade={quantidadeCompras} 
+        onPress = { () => navigation.navigate('TelaCarrinho')}
+         />
        </View>
        <View
          style={{
@@ -198,6 +203,7 @@
                    {...item}
                    setList={setList}
                    changeBookmark={() => changeBookmark(index)}
+                   onPress = {() => navigation.navigate('TelaDetalheProdutos')} // Falta mandar com a roupa específica em si
                  />
                )}
              />
