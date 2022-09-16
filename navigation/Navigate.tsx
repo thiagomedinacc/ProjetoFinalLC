@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function Navigate() {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="TelaDetalheProdutos"
       screenOptions={{
         headerStyle: {backgroundColor: '#DBE8D9'},
         headerTintColor: '#0B2545',

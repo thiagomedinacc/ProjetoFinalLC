@@ -4,12 +4,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 interface CarrinhodeComprasProps {
   quantidade: number;
+  onPress? : any // Ver o tipo depois
 }
 
 export default function CarrinhoDeCompras(props: CarrinhodeComprasProps) {
   return (
     <View>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={props.onPress}>
         <View style={{}}>
           <Text style={styles.quantidade}> {props.quantidade}</Text>
           <Icon size={25} color="#222" name="shopping-cart" />
